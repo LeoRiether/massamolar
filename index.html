@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculadora de Massa Molar</title>
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="app.min.css">
+  </head>
+  <body>
+
+    <header class="header">
+      <div class="circle primary"></div>
+      <!--<div class="bar primary"></div>-->
+      <h1 class="title">Calculadora<br>Massa Molar</h1>
+    </header>
+
+    <div class="content">
+
+      <div class="pure-form pure-form-stacked">
+        <!--<fieldset>-->
+          <label for="formula">Fórmula Molecular</label>
+          <input type="text" id="formula">
+
+          <label for="massa">Massa (em gramas)</label>
+          <input type="number" id="massa">
+
+          <label class="pure-checkbox">
+            <input type="checkbox" id="isgas">
+            É um gás?
+          </label>
+
+          <button class="pure-button pure-button-primary calc">Calcular</button>
+        <!--</fieldset>-->
+      </form>
+
+      <div class="results" hidden>
+        <p>Massa Molar: <span class="rmass"></span></p>
+        <p class="rmolswrap">Número de Mols: <span class="rmols"></span></p>
+        <p class="rvolwrap">Volume do Gás: <span class="rvol"></span></p>
+      </div>
+
+    </div>
+
+
+    <script src="app.js"></script>
+
+  </body>
+</html>
