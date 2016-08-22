@@ -89,6 +89,9 @@ var API = (function (Enum) {
   }
   pub.eval = function (str) {
     try {
+      // If all of the string is lowercase, caps lock it
+      if (str.toLowerCase() === str) str = str.toUpperCase();
+
       var r = evalParen(str);
       evt.fire('evaluated', str, r);
       return r;
@@ -97,36 +100,42 @@ var API = (function (Enum) {
     }
   };
 
-  var renderResults = function () {
+
+  var showResults = function () {
     results.hidden = false;
+
+    if (inp.massa.value) rMolsWrap.hidden = false;
+    else rMolsWrap.hidden = true;
+
+    if (inp.isgas.checked && inp.massa.value) rVolWrap.hidden = false;
+    else rVolWrap.hidden = true;
+  };
+
+  var renderResults = function () {
     var mm = pub.eval(inp.formula.value.trim());
 
     rMass.innerHTML = mm + 'g/mol';
 
     var m = parseInt(inp.massa.value);
     if (inp.massa.value && !isNaN(m)) {
-      rMolsWrap.hidden = false;
       var n = m / mm;
       rMols.innerHTML = _round(n, 3) + 'mol';
 
       // Gás
       if (inp.isgas.checked) {
-        rVolWrap.hidden = false;
         rVol.innerHTML = _round(n*22.71, 3) + 'L';
-      } else {
-        rVolWrap.hidden = true;
       }
 
-    } else {
-      rMolsWrap.hidden = true;
     }
   };
 
   var calcBtnClick = function () {
-    if (inp.formula.value)
+    if (inp.formula.value) {
+      showResults();
       renderResults();
-    else
+    } else {
       alert('A fórmula molecular não pode estar em branco');
+    }
   };
 
   // Cache DOM
