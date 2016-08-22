@@ -51,6 +51,12 @@ var API = (function (Enum) {
     req.send(null);
   };
 
+  // Rounds a number n to p decimal places
+  function _round(n, p) {
+    p = Math.pow(10, p);
+    return Math.round(n*p)/p;
+  }
+
   //var _test = 'CC2Cn3CN4(O2H)10(OH(SO4)3)2';
   var reglex = /([A-Z][a-z]*|\(.+\)|\d+)/g;
   var evalParen = function (exp) {
@@ -101,12 +107,12 @@ var API = (function (Enum) {
     if (inp.massa.value && !isNaN(m)) {
       rMolsWrap.hidden = false;
       var n = m / mm;
-      rMols.innerHTML = n + 'mol';
+      rMols.innerHTML = _round(n, 3) + 'mol';
 
       // Gás
       if (inp.isgas.checked) {
         rVolWrap.hidden = false;
-        rVol.innerHTML = (n*22.71) + 'L';
+        rVol.innerHTML = _round(n*22.71, 3) + 'L';
       } else {
         rVolWrap.hidden = true;
       }
