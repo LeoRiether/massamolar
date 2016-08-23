@@ -100,6 +100,10 @@ var API = (function (Enum) {
     }
   };
 
+  pub.toggleFooter = function () {
+    footer.classList.toggle('active');
+    footerHintWrap.classList.toggle('active');
+  };
 
   var showResults = function () {
     results.hidden = false;
@@ -152,9 +156,12 @@ var API = (function (Enum) {
   var rMols = $('.rmols', rMolsWrap);
   var rVolWrap = $('.rvolwrap', results);
   var rVol = $('.rvol', rVolWrap);
+  var footer = $('.footer');
+  var footerHintWrap = $('.footer-hint-wrapper');
 
   // Bind event listeners
   calcBtn.addEventListener('click', calcBtnClick);
+  footerHintWrap.addEventListener('click', pub.toggleFooter);
 
   // Request 'massas.json' to load elements
   getMassJson();
